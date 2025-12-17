@@ -17,7 +17,7 @@ export class PostagemController {
   // 🔹 GET ALL
   @Get()
   findAll(): Promise<Postagem[]> {
-    return this.postagemService.getAll();
+    return this.postagemService.findAll();
   }
 
   // 🔹 GET BY ID

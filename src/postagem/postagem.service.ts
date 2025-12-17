@@ -10,18 +10,28 @@ export class PostagemService {
     private postagemRepository: Repository<Postagem>,
   ) {}
 
-  // 🔹 GET ALL
-  async getAll(): Promise<Postagem[]> {
-    return await this.postagemRepository.find();
+  // 🔹 GET ALL (com Tema)
+  async findAll(): Promise<Postagem[]> {
+    return await this.postagemRepository.find({
+      relations: {
+        tema: true,
+      },
+    });
   }
 
-  // 🔹 GET BY ID
+  // 🔹 GET BY ID (com Tema)
   async findById(id: number): Promise<Postagem> {
     const postagem = await this.postagemRepository.findOne({
       where: { id },
+      relations: {
+        tema: true,
+      },
     });
 
-    if (!postagem) throw new NotFoundException('Postagem não encontrada');
+    if (!postagem) {
+      throw new NotFoundException('Postagem não encontrada');
+    }
+
     return postagem;
   }
 
@@ -30,6 +40,9 @@ export class PostagemService {
     return await this.postagemRepository.find({
       where: {
         titulo: Like(`%${titulo}%`),
+      },
+      relations: {
+        tema: true,
       },
     });
   }
