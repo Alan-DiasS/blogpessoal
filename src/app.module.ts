@@ -29,6 +29,8 @@ import { Tema } from './tema/entities/tema.entity';
 
 import { PostagemModule } from './postagem/postagem.module';
 import { TemaModule } from './tema/tema.module';
+import { AuthModule } from './auth/auth.module';
+import { UsuarioModule } from './usuario/usuario.module';
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import { TemaModule } from './tema/tema.module';
     }),
     PostagemModule,
     TemaModule,
+    AuthModule,
+    UsuarioModule,
   ],
 })
 export class AppModule {}
