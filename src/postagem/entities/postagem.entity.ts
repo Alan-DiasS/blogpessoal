@@ -44,6 +44,7 @@
 //   })
 //   tema: Tema;
 // }
+import { IsNotEmpty } from 'class-validator';
 import {
   Column,
   Entity,
@@ -51,7 +52,6 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { IsNotEmpty } from 'class-validator';
 import { Tema } from '../../tema/entities/tema.entity';
 import { Usuario } from '../../usuario/entities/usuario.entity';
 
@@ -71,13 +71,11 @@ export class Postagem {
   @UpdateDateColumn()
   data: Date;
 
-  // 🔗 RELACIONAMENTO COM TEMA
   @ManyToOne(() => Tema, (tema) => tema.postagem, {
     onDelete: 'CASCADE',
   })
   tema: Tema;
 
-  // 🔗 RELACIONAMENTO COM USUARIO
   @ManyToOne(() => Usuario, (usuario) => usuario.postagem, {
     onDelete: 'CASCADE',
   })

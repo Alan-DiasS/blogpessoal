@@ -23,14 +23,14 @@
 // export class AppModule {}
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-
 import { Postagem } from './postagem/entities/postagem.entity';
-import { Tema } from './tema/entities/tema.entity';
-
 import { PostagemModule } from './postagem/postagem.module';
+import { Tema } from './tema/entities/tema.entity';
 import { TemaModule } from './tema/tema.module';
 import { AuthModule } from './auth/auth.module';
 import { UsuarioModule } from './usuario/usuario.module';
+import { Usuario } from './usuario/entities/usuario.entity';
+import { AppController } from './postagem/app.controller';
 
 @Module({
   imports: [
@@ -41,7 +41,7 @@ import { UsuarioModule } from './usuario/usuario.module';
       username: 'root',
       password: 'root',
       database: 'db_blogpessoal',
-      entities: [Postagem, Tema],
+      entities: [Postagem, Tema, Usuario],
       synchronize: true,
     }),
     PostagemModule,
@@ -49,5 +49,7 @@ import { UsuarioModule } from './usuario/usuario.module';
     AuthModule,
     UsuarioModule,
   ],
+  controllers: [AppController],
+  providers: [],
 })
 export class AppModule {}
